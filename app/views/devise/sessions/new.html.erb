@@ -1,0 +1,29 @@
+<div class="container">
+	<div class="row">
+		<div class="col-4"></div>
+		<div class="col-4 mt-5 mb-5">
+			<div class="card text-center bg-light" style="width: 100%;">
+				<div class="form-group">
+					<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+					  <div class="field">
+					  	<div class="box">
+					    <%= f.text_field :employee_code, autofocus: true, placeholder: "社員番号",class:"form-control"%>
+						</div>
+					  </div>
+
+					  <div class="field">
+					  	<div class="box">
+					    <%= f.password_field :password, placeholder: "パスワード", class:"form-control"%>
+						</div>
+					  </div>
+
+					  <div class="actions">
+					    <%= f.submit "ログイン", class:"btn btn-primary"%>
+					  </div>
+					<% end %>
+				</div>
+			</div>
+		</div>
+		<div class="col-4"></div>
+	</div>
+</div>
