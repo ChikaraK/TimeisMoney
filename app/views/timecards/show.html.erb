@@ -1,3 +1,17 @@
-<p> <%= link_to " Logout",destroy_user_session_path, method: :delete, class: "glyphicon glyphicon-log-out logout"%>
-	
-</p>
+<div class="container">
+	<div class="row">
+		<div class="col-1"></div>
+		<div class="col-10">
+			<p> <%= link_to " Logout",destroy_user_session_path, method: :delete%>
+				<%= Date.today.year%>
+				<%= Date.today.month%>
+				<%= Date.today.day%>
+			</p>
+			<%=form_with model:@timecard do |f|%>
+				<%= f.hidden_field :year,:value => Date.today%>
+				<%= f.submit "出勤"%>
+			<% end %>
+		</div>
+		<div class="col-1"></div>
+	</div>
+</div>
