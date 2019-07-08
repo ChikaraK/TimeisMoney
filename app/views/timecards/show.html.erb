@@ -1,33 +1,39 @@
 <div class="container">
 	<div class="row">
-		<div class="col-1"></div>
-		<div class="col-10">
-			<p> <%= link_to " Logout",destroy_user_session_path, method: :delete%></p>
-			<h2> <%= Date.today.year%>年
-				<%= Date.today.month%>月
-				<%= Date.today.day%>日
-				<%= Time.zone.now.strftime('%H:%M:%S')%>
-				<%= @timecard.user.name%>さん
-			</h2>
-			<% if !@timecard.in_time && Date.today.year != @timecard.year %>
-				<%=form_for (@newcard) do |f|%>
-					<%= f.hidden_field :year,:value => Date.today.year%>
-					<%= f.hidden_field :month,:value => Date.today.month%>
-					<%= f.hidden_field :day,:value => Date.today.day%>
-					<%= f.hidden_field :user_id,:value => current_user.id %>
+		<div class="col-4"></div>
+		<div class="col-4 mt-5 mb-5">
+			<div class="card text-center bg-light" style="width: 100%;">
 
-					<% time = Time.zone.now %>
-					<%= f.hidden_field :in_time, :value => time.strftime('%H:%M') %>
+				<h4> <%= Date.today.year%>年
+					<%= Date.today.month%>月
+					<%= Date.today.day%>日
+				</h4>
+				<h4>
+					<%= Time.zone.now.strftime('%H:%M:%S')%>
+				</h4>
+					<!-- <%= @timecard.user.name%>さん -->
+				<% if @timecard.year != Date.today.year && @timecard.month != Date.today.month && @timecard.day != Date.today.day %>
+					<%=form_for (@newcard) do |f|%>
+						<%= f.hidden_field :year,:value => Date.today.year%>
+						<%= f.hidden_field :month,:value => Date.today.month%>
+						<%= f.hidden_field :day,:value => Date.today.day%>
+						<%= f.hidden_field :user_id,:value => current_user.id %>
 
-					<%= f.submit "出勤",class:"btn btn-primary"%>
+						<% time = Time.zone.now %>
+						<%= f.hidden_field :in_time, :value => time.strftime('%H:%M') %>
+
+						<%= f.submit "出勤",class:"btn btn-primary"%>
+					<% end %>
+				<%elsif @timecard.year != Date.today.year && @timecard.month != Date.today.month && @timecard.day != Date.today.day && !@timecard.out_time %>
+					<%=form_for (@timecard) do |f|%>
+						<% time = Time.zone.now %>
+						<%= f.hidden_field :out_time, :value => time.strftime('%H:%M') %>
+						<%= f.submit "退勤",class:"btn btn-primary"%>
+					<% end %>
+				<%else%>
+					<h3>今日もお疲れさまでした！</h3>
 				<% end %>
-			<%elsif !@timecard.out_time%>
-				<%=form_for (@timecard) do |f|%>
-					<% time = Time.zone.now %>
-					<%= f.hidden_field :out_time, :value => time.strftime('%H:%M') %>
-					<%= f.submit "退勤",class:"btn btn-primary"%>
-				<% end %>
-			<% end %>
+			</div>
 		</div>
 		<div class="col-1"></div>
 	</div>

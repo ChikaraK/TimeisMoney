@@ -1,1 +1,25 @@
-<p>Indexだよ</p>
+<div class="container">
+	<div class="row">
+		<div class="col-2"></div>
+		<div class="col-8 mt-5 mb-5">
+			<h2><%= Date.today.year %>年<%= Date.today.month %>月</h2>
+			<table class="table">
+				<tr>
+					<th>日にち</th>
+					<th>出勤</th>
+					<th>退勤</th>
+					<th>勤務時間</th>
+				</tr>
+			<% @timecards.each do |time|%>
+				<tr>
+					<td><%=time.day%></td>
+					<td><%=time.in_time.strftime('%H:%M')%></td>
+					<td><%="HOGE"%></td>
+					<td><%="DIZZ"%></td>
+				</tr>
+			<%end%>
+			</table>
+		</div>
+		<div class="col-2"></div>
+	</div>
+</div>
