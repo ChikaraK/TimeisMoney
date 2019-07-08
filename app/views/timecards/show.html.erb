@@ -2,14 +2,31 @@
 	<div class="row">
 		<div class="col-1"></div>
 		<div class="col-10">
-			<p> <%= link_to " Logout",destroy_user_session_path, method: :delete%>
-				<%= Date.today.year%>
-				<%= Date.today.month%>
-				<%= Date.today.day%>
-			</p>
-			<%=form_with model:@timecard do |f|%>
-				<%= f.hidden_field :year,:value => Date.today%>
-				<%= f.submit "出勤"%>
+			<p> <%= link_to " Logout",destroy_user_session_path, method: :delete%></p>
+			<h2> <%= Date.today.year%>年
+				<%= Date.today.month%>月
+				<%= Date.today.day%>日
+				<%= Time.zone.now.strftime('%H:%M:%S')%>
+				<%= @timecard.user.name%>さん
+			</h2>
+			<% if !@timecard.in_time && Date.today.year != @timecard.year %>
+				<%=form_for (@newcard) do |f|%>
+					<%= f.hidden_field :year,:value => Date.today.year%>
+					<%= f.hidden_field :month,:value => Date.today.month%>
+					<%= f.hidden_field :day,:value => Date.today.day%>
+					<%= f.hidden_field :user_id,:value => current_user.id %>
+
+					<% time = Time.zone.now %>
+					<%= f.hidden_field :in_time, :value => time.strftime('%H:%M') %>
+
+					<%= f.submit "出勤",class:"btn btn-primary"%>
+				<% end %>
+			<%elsif !@timecard.out_time%>
+				<%=form_for (@timecard) do |f|%>
+					<% time = Time.zone.now %>
+					<%= f.hidden_field :out_time, :value => time.strftime('%H:%M') %>
+					<%= f.submit "退勤",class:"btn btn-primary"%>
+				<% end %>
 			<% end %>
 		</div>
 		<div class="col-1"></div>
