@@ -14,8 +14,8 @@
 				<tr>
 					<td><%=time.day%></td>
 					<td><%=time.in_time.strftime('%H:%M')%></td>
-					<td><%="HOGE"%></td>
-					<td><%="DIZZ"%></td>
+					<td><%=time.out_time.strftime('%H:%M')%></td>
+					<td><%=time.out_time - time.in_time%></td>
 				</tr>
 			<%end%>
 			</table>

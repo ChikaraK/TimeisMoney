@@ -7,12 +7,12 @@
 				<h4> <%= Date.today.year%>年
 					<%= Date.today.month%>月
 					<%= Date.today.day%>日
+					<%= !@timecard %>
 				</h4>
 				<h4>
 					<%= Time.zone.now.strftime('%H:%M:%S')%>
 				</h4>
-					<!-- <%= @timecard.user.name%>さん -->
-				<% if @timecard.year != Date.today.year && @timecard.month != Date.today.month && @timecard.day != Date.today.day %>
+				<% if  !@timecard %>
 					<%=form_for (@newcard) do |f|%>
 						<%= f.hidden_field :year,:value => Date.today.year%>
 						<%= f.hidden_field :month,:value => Date.today.month%>
@@ -24,7 +24,7 @@
 
 						<%= f.submit "出勤",class:"btn btn-primary"%>
 					<% end %>
-				<%elsif @timecard.year != Date.today.year && @timecard.month != Date.today.month && @timecard.day != Date.today.day && !@timecard.out_time %>
+				<%elsif @timecard.in_time && !@timecard.out_time %>
 					<%=form_for (@timecard) do |f|%>
 						<% time = Time.zone.now %>
 						<%= f.hidden_field :out_time, :value => time.strftime('%H:%M') %>
