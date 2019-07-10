@@ -1,6 +1,9 @@
 class TimecardsController < ApplicationController
 	def index
+		# 勤怠データ
 		@timecards = Timecard.where("user_id = ?",current_user.id )
+		# 月データ
+		@monthly = Date.today.beginning_of_month..Date.today.end_of_month
 	end
 
 	def show
