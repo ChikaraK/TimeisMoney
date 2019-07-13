@@ -7,11 +7,10 @@
 				<h4> <%= Date.today.year%>年
 					<%= Date.today.month%>月
 					<%= Date.today.day%>日
-					<%= !@timecard %>
 				</h4>
-				<h4>
-					<%= Time.zone.now.strftime('%H:%M:%S')%>
-				</h4>
+				<div class="times">
+					<h3 class="clock_time"></h3>
+				</div>
 				<% if  !@timecard %>
 					<%=form_for (@newcard) do |f|%>
 						<%= f.hidden_field :year,:value => Date.today.year%>

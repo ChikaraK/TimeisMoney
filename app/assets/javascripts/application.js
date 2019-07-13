@@ -16,3 +16,18 @@
 //= require jquery
 //= require bootstrap-sprockets
 //= require_tree .
+
+$(function(){
+    setInterval(function(){
+	var now = new Date();
+	// 時
+	var h = now.getHours();
+    // 分
+    var mi = now.getMinutes();
+    // 秒
+    var s = now.getSeconds();
+    if (mi < 10) mi = "0" + mi;
+    if (s < 10) s = "0" + s;
+	$(".clock_time").text( h + ":" + mi + ":" + s);
+    },1000);
+});

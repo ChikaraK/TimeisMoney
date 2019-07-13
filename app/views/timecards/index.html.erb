@@ -14,7 +14,7 @@
 				 <tr>
 				  	<td><%= date.strftime('%-m月%-d日') %></td>
 	 				<% @timecards.each do |time|%>
-	 					<%if date.day == time.day && date.month == time.month && date.year == time.year %>
+	 					<%if (date.day == time.day && date.month == time.month && date.year == time.year) %>
 							<td><%=time.in_time.strftime('%H:%M')%></td>
 							<td><%=time.out_time.strftime('%H:%M') if time.out_time %></td>
 							<td><%=Time.at(time.out_time - time.in_time).strftime('%-H時間%-M分') if time.out_time %></td>
