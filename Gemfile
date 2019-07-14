@@ -69,6 +69,8 @@ gem "bootstrap"
 gem 'jquery-rails'
 gem "seed-fu"
 gem "kaminari"
+gem 'dotenv-rails'
 # omniauth
 gem 'omniauth'
 gem 'omniauth-twitter'
+gem 'omniauth-google-oauth2'

@@ -1,4 +1,7 @@
 class TimecardsController < ApplicationController
+	before_action :authenticate_user!
+
+
 	def index
 		# 勤怠データ
 		@timecards = Timecard.where("user_id = ?",current_user.id )
@@ -30,5 +33,10 @@ class TimecardsController < ApplicationController
 
 	def timecard_params
 		params.require(:timecard).permit(:year,:month,:day,:in_time,:out_time,:user_id)
+	end
+
+	def check_user
+ 		@user = User.find(params[:id])
+  		redirect_to new_user_session_path unless @user == current_user
 	end
 end
