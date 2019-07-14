@@ -1,6 +1,4 @@
 class TimecardsController < ApplicationController
-	before_action :authenticate_user!
-
 
 	def index
 		# 勤怠データ

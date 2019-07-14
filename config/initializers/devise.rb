@@ -260,9 +260,9 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   config.omniauth :google_oauth2,
-    Rails.application.credentials.google_oauth[:client_id],
-    Rails.application.credentials.google_oauth[:client_secret],
-    { promot: :select_account }
+    ENV['GOOGLE_ID'],
+    ENV['GOOGLE_SECRET'],
+    { prompt: :select_account }
     Rails.application.config.middleware.use OmniAuth::Builder do
       provider :google_oauth2, Rails.application.credentials.google_oauth[:client_id], Rails.application.credentials.google_oauth[:client_secret], {:skip_jwt => true }
     end

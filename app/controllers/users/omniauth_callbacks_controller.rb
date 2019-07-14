@@ -33,15 +33,18 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     @user = User.find_by(uid: token.uid, provider: token.provider)
     if @user.blank?
       @user = User.create(
-        uid: token.uid,
+        uid:      token.uid,
         provider: token.provider,
-        email: token.info.email,
-        name: token.info.name
-        )
+        email:    token.info.email,
+        name:     token.info.name
+      )
     else
       @user.update(email: token.info.email) if @user.email != token.info.email
       @user.update(name: token.info.name) if @user.name != token.info.name
     end
-  sign_in_and_redirect @user, event: :authentication
+    
+    sign_in_and_redirect @user, event: :authentication
   end
+
+
 end
