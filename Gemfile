@@ -69,9 +69,12 @@ gem "bootstrap"
 gem 'jquery-rails'
 gem "seed-fu"
 gem "kaminari"
+# env用
 gem 'dotenv-rails'
 # omniauth
 gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'omniauth-google-oauth2'
 gem "omniauth-rails_csrf_protection"
+# slack
+gem 'slack-notifier'

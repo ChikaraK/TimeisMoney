@@ -264,7 +264,8 @@ Devise.setup do |config|
     ENV['GOOGLE_SECRET'],
     { prompt: :select_account }
     Rails.application.config.middleware.use OmniAuth::Builder do
-      provider :google_oauth2, Rails.application.credentials.google_oauth[:client_id], Rails.application.credentials.google_oauth[:client_secret], {:skip_jwt => true }
+      provider :google_oauth2, ENV['GOOGLE_ID'], ENV['GOOGLE_SECRET'], {:skip_jwt => true }
+      {:provider_ignores_state => true}
     end
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

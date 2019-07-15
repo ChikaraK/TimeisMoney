@@ -16,15 +16,21 @@ class TimecardsController < ApplicationController
 	def create
 		# 出勤記録用
 		newcard = Timecard.new(timecard_params)
-		newcard.save
-		redirect_to timecard_path(current_user)
+		if newcard.save
+			notifier = Slack::Notifier.new "#{ENV["SLACK_URL"]}"
+			notifier.ping "出勤！！"
+			redirect_to timecard_path(current_user)
+		end
 	end
 
 	def update
 		# 退勤記録用
 		timecard = Timecard.find(params[:id])
-		timecard.update(timecard_params)
-		redirect_to timecard_path(current_user)
+		if timecard.update(timecard_params)
+			notifier = Slack::Notifier.new "#{ENV["SLACK_URL"]}"
+			notifier.ping "退勤！！"
+			redirect_to timecard_path(current_user)
+		end
 	end
 
 	private

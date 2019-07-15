@@ -21,7 +21,7 @@
 					    <%= f.submit "ログイン", class:"btn btn-primary"%>
 					  </div>
 						<% if current_user.blank? %>
-						<%= link_to "Sign in with google", user_google_oauth2_omniauth_authorize_path %>
+						<%= link_to "Sign in with google", user_google_oauth2_omniauth_authorize_path, method: :post%>
 						<% else %>
 						<%= link_to "Sign out", sign_out_path, method: :delete %>
 						<% end %>
