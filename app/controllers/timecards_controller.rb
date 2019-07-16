@@ -18,7 +18,7 @@ class TimecardsController < ApplicationController
 		newcard = Timecard.new(timecard_params)
 		if newcard.save
 			notifier = Slack::Notifier.new "#{ENV["SLACK_URL"]}"
-			notifier.ping "出勤！！"
+			notifier.ping "出勤！！#{Time.zone.now.strftime('%H:%M')}"
 			redirect_to timecard_path(current_user)
 		end
 	end
@@ -28,7 +28,7 @@ class TimecardsController < ApplicationController
 		timecard = Timecard.find(params[:id])
 		if timecard.update(timecard_params)
 			notifier = Slack::Notifier.new "#{ENV["SLACK_URL"]}"
-			notifier.ping "退勤！！"
+			notifier.ping "退勤！！#{Time.zone.now.strftime('%H:%M')}"
 			redirect_to timecard_path(current_user)
 		end
 	end
