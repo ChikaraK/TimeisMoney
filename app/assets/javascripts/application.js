@@ -17,6 +17,7 @@
 //= require bootstrap-sprockets
 //= require_tree .
 
+// デジタル時計
 $(function(){
     setInterval(function(){
 	var now = new Date();
@@ -30,4 +31,25 @@ $(function(){
     if (s < 10) s = "0" + s;
 	$(".clock_time").text( h + ":" + mi + ":" + s);
     },1000);
+});
+
+// スクロールボタン
+//■page topボタン
+
+$(function () {
+    var pagetop = $('#page_top');
+    pagetop.hide();
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 10) { //100pxスクロールしたら表示
+            pagetop.fadeIn();
+        } else {
+            pagetop.fadeOut();
+        }
+    });
+    pagetop.click(function () {
+        $('body,html').animate({
+            scrollTop: 0
+        }, 500); //0.5秒かけてトップへ移動
+        return false;
+    });
 });

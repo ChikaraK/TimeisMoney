@@ -5,6 +5,17 @@ class TimecardsController < ApplicationController
 		@timecards = Timecard.where("user_id = ?",current_user.id )
 		# 月データ
 		@monthly = Date.today.beginning_of_month..Date.today.end_of_month
+		@grouped = {}
+
+		@monthly.each do |m|
+			@timecards.each do |t|
+				if t.day == m.day && t.month == m.month && t.year == m.year
+					@grouped.store(m,t)
+				else
+					@grouped.store(m,"00:00")
+				end
+			end
+		end
 	end
 
 	def show
