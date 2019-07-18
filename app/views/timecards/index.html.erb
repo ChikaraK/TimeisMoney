@@ -10,15 +10,42 @@
 					<th>退勤</th>
 					<th>勤務時間</th>
 				</tr>
-			<% @grouped.each do |date,time| %>
+			<%work_amount = 0%>
+			<% @unites.each do |date,time| %>
 				 <tr>
 				  	<td><%= date.strftime('%-m月%-d日') %></td>
-					<td><%=time == "00:00" ? time : time.in_time.strftime('%H:%M')%></td>
-					<td><%=time == "00:00" ? time : time.class%></td>
-					<td><%="hoge" %></td>
+				  	<td>
+						<% if time == "00:00" %>
+							<%= time %>
+						<% elsif time.in_time == nil %>
+							<%= "00:00"%>
+						<% elsif time.in_time != nil%>
+							<%= time.in_time.strftime('%H:%M')%>
+						<%end%>
+				  	</td>
+				  	<td>
+						<% if time == "00:00" %>
+							<%= time %>
+						<% elsif time.out_time == nil %>
+							<%= "00:00"%>
+						<% elsif time.out_time != nil%>
+							<%= time.out_time.strftime('%H:%M')%>
+						<%end%>
+				  	</td>
+				  	<td>
+						<% if time == "00:00" %>
+							<%= time %>
+						<% elsif time.in_time == nil || time.out_time == nil%>
+							<%= "要連絡" %>
+						<% elsif time.in_time != nil || time.out_time != nil%>
+							<%= Time.at(time.out_time - time.in_time).strftime('%-H時間%-M分')%>
+							<% work_amount += time.out_time - time.in_time %>
+						<%end%>
+				  	</td>
 				</tr>
 			<% end %>
 			<%= link_to "打刻画面へ", timecard_path(current_user)%>
+			<h2><%= "今月の労働時間は" + Time.at(work_amount).strftime('%-H時間%-M分') + "です"%></h2>
 			</table>
 		</div>
 		<div class="col-2"></div>

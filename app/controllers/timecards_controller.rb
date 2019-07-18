@@ -5,14 +5,16 @@ class TimecardsController < ApplicationController
 		@timecards = Timecard.where("user_id = ?",current_user.id )
 		# 月データ
 		@monthly = Date.today.beginning_of_month..Date.today.end_of_month
-		@grouped = {}
-
+		# 勤怠データ入れ
+		@unites = {}
+		# 勤怠データと月データ合算
 		@monthly.each do |m|
 			@timecards.each do |t|
-				if t.day == m.day && t.month == m.month && t.year == m.year
-					@grouped.store(m,t)
+				if m.day == t.day && m.month == t.month 
+				  @unites.store(m,t)
+				  break
 				else
-					@grouped.store(m,"00:00")
+				   @unites.store(m,"00:00")
 				end
 			end
 		end
