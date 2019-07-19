@@ -65,10 +65,10 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # 追加
 gem "devise"
+# bootstrap関係
 gem "bootstrap"
-gem 'jquery-rails'
-gem "seed-fu"
-gem "kaminari"
+gem 'bootstrap-social-rails'
+gem 'font-awesome-rails'
 # env用
 gem 'dotenv-rails'
 # omniauth
@@ -78,3 +78,7 @@ gem 'omniauth-google-oauth2'
 gem "omniauth-rails_csrf_protection"
 # slack
 gem 'slack-notifier'
+# その他
+gem 'jquery-rails'
+gem "seed-fu"
+gem "kaminari"

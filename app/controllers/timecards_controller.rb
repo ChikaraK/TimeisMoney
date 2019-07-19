@@ -1,5 +1,5 @@
 class TimecardsController < ApplicationController
-
+before_action :authenticate_user!
 	def index
 		# 勤怠データ
 		@timecards = Timecard.where("user_id = ?",current_user.id )
@@ -16,6 +16,12 @@ class TimecardsController < ApplicationController
 				else
 				   @unites.store(m,"00:00")
 				end
+			end
+		end
+		respond_to do |format|
+			format.html
+			format.csv do
+				send_data render_to_string, filename: "index.csv", type: :csv
 			end
 		end
 	end

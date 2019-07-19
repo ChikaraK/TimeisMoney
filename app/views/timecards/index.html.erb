@@ -3,17 +3,23 @@
 		<div class="col-2"></div>
 		<div class="col-8 mt-5 mb-5">
 			<h2><%= Date.today.year %>年<%= Date.today.month %>月</h2>
-			<table class="table">
+			<table class="table table-hover">
+			<thead class="bg-blue text-white">
 				<tr>
-					<th>日にち</th>
+					<th>日程</th>
+					<th>曜日</th>
 					<th>出勤</th>
 					<th>退勤</th>
 					<th>勤務時間</th>
 				</tr>
+			</thead>
 			<%work_amount = 0%>
 			<% @unites.each do |date,time| %>
+
 				 <tr>
 				  	<td><%= date.strftime('%-m月%-d日') %></td>
+				  	<td><%= date.strftime("#{%w(日 月 火 水 木 金 土)[date.wday]}") %>
+				  	</td>
 				  	<td>
 						<% if time == "00:00" %>
 							<%= time %>
@@ -45,8 +51,11 @@
 				</tr>
 			<% end %>
 			<%= link_to "打刻画面へ", timecard_path(current_user)%>
-			<h2><%= "今月の労働時間は" + Time.at(work_amount).strftime('%-H時間%-M分') + "です"%></h2>
+			<h2><%= "今月の合計労働時間は" + Time.at(work_amount).strftime('%-H時間%-M分') + "です"%></h2>
 			</table>
+			<div class="mr-1">
+				<%= link_to "CSVへ出力する", timecards_path(format: :csv),class:"btn btn-warning text-white"%>
+			</div>
 		</div>
 		<div class="col-2"></div>
 	</div>

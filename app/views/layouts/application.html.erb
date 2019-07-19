@@ -10,23 +10,29 @@
   </head>
 
   <body>
-  <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-     <span class="navbar-brand" href="#">TimeisMoney</span>
+  <header id="header">
+    <nav class="navbar navbar-expand-lg navbar-light bg-blue">
+     <span class="navbar-brand text-white text-center">TimeisMoney</span>
       <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarForm" aria-controls="navbarForm" aria-expanded="false" aria-label="ナビゲーションの切替">
         <span class="navbar-toggler-icon"></span>
       </button>
       <%if user_signed_in?%>
       <div class="collapse navbar-collapse">
-        <a class="nav-item nav-link active my-2 my-lg-0 ml-auto" href="#"> <%= link_to " ログアウト",destroy_user_session_path, method: :delete%></a>
-        <a class="nav-item nav-link active mr-1" href="#"> <%= link_to "勤怠表一覧",timecards_path %></a>
+        <a class="nav-item nav-link active my-2 my-lg-0 ml-auto" href="#"> <%= link_to " ログアウト",destroy_user_session_path, method: :delete,class:"text-white"%></a>
+        <a class="nav-item nav-link active mr-1" href="#"> <%= link_to "勤怠表一覧",timecards_path ,class:"text-white"%></a>
       </div>
       <% end %>
     </nav>
   </header>
     <%= yield %>
-      <footer>
-        <div id="page_top"><a href="#"></a></div>
-      </footer>
+    <footer>
+      <div id="wrapper">
+          <footer id="footer" class="bg-blue">
+            <div class="block_30"></div>
+              <p>Copyright © 2019 TIM All Rights Reserved.</p>
+          </footer>
+      </div>
+      <div id="page_top"><a href="#"></a></div>
+    </footer>
   </body>
 </html>

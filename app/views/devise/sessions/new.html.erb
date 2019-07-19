@@ -1,7 +1,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-4"></div>
-		<div class="col-4 mt-5 mb-5">
+		<div class="col-4 mt-5 mb-5 px-0">
 			<div class="card text-center bg-light" style="width: 100%;">
 				<div class="form-group">
 					<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -20,11 +20,19 @@
 					  <div class="actions">
 					    <%= f.submit "ログイン", class:"btn btn-primary"%>
 					  </div>
-						<% if current_user.blank? %>
-						<%= link_to "Sign in with google", user_google_oauth2_omniauth_authorize_path, method: :post%>
-						<% else %>
-						<%= link_to "Sign out", sign_out_path, method: :delete %>
+					  <div class="mt-2 mb-2">
+					  	<span>or</span>
+					  </div>
+					  <div class="mx-2">
+		  				<% if current_user.blank? %>
+							<%= link_to user_google_oauth2_omniauth_authorize_path, method: :post, class: "btn btn-block btn-social btn-google" do %>
+								<span class="fa fa-google"></span> Googleアカウントでログイン
+							<% end %>
 						<% end %>
+					  <div class="mt-2 mb-2">
+					  	<%= link_to "新規登録はこちら",new_user_registration_path %>
+					  </div>
+					</div>
 					<% end %>
 				</div>
 			</div>
